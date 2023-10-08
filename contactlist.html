@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="scripts/comfycontacts.js?t=1"></script>
+
+<head>
+    <!--metadata of page-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--title-->
+    <title>Comfy Contacts</title>
+    <!--favicon for top title-->
+    <link rel="icon" type="image/png" sizes="24x24" href="img/favicon.png">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
+        integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body id="listPage" onload="readContactCount();">
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <h3>Comfy Contacts</h3>
+            </a>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a class="nav-style" type="button" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Add Contact Pop-Up Form-->
+    <div class="modal fade" id="contactForm" tabindex="-1" role="dialog" aria-labelledby="contactForm"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Add Contact</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-4">
+                        <input type="text" id="addfirstname" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="addfirstname">First Name</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="text" id="addlastname" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="addlastname">Last Name</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="email" id="addemail" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="addemail">Email</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="text" id="addphone" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="addphone">Phone Number</label>
+                    </div>
+                    <div class="mb-4">
+                        <p id="addcontactmsg" style="color: rgb(204, 46, 46);"></p>
+                    </div>
+                    <button type="button" class="btn btn-info btn-block btn-round"
+                        onclick="addContact()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Edit Contact Pop-Up Form-->
+    <div class="modal fade" id="editContactForm" tabindex="-1" role="dialog" aria-labelledby="editContactForm"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Edit Contact</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-4">
+                        <input type="text" id="editfirstname" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="editfirstname">First Name</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="text" id="editlastname" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="editlastname">Last Name</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="email" id="editemail" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="editemail">Email</label>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="text" id="editphone" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="editphone">Phone Number</label>
+                    </div>
+                    <div class="mb-4">
+                        <p id="editcontactmsg" style="color: rgb(204, 46, 46);"></p>
+                    </div>
+                    <button type="button" class="btn btn-info btn-block btn-round"
+                        onclick="editContact()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contact List Block-->
+    <div class = "container" id = "contacts">
+        <div class="row" style="padding-bottom: 20px">
+            <div class="gap-2 mb-3" id="searchBar">
+                <div class="input-group" style="position:absolute;left:25%;">
+                    <input type="search" class="form-control rounded" id="search" placeholder="Search" />
+                    <button type="button" class="btn btn-secondary" onclick="searchContactCount()">Search</button>
+                    <a href="" data-toggle="modal" data-target="#contactForm" class="btn btn-secondary">
+                        <i class="bx bx-plus me-1"> </i>
+                    </a>
+                </div>
+            </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="">
+                    <div class="table-responsive">
+                        <table class="table project-list-table table-nowrap align-middle table-borderless" id="contactlist">
+                            <thead>
+                                <tr>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col" style="width: 200px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--Here the rest of the rows will be added-->
+                            </tbody>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Page Button Block-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="project-list-table table-nowrap align-middle table-borderless" id="pagelist" style="margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <!--Here the page buttons will be added-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- jQuery -->
+<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+<!-- Popper JS -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+<!-- Bootstrap JS -->
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
+<!-- Custom Script -->
+<script src="scripts/scripts.js"></script>
+
+</html>

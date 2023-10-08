@@ -1,0 +1,83 @@
+/* style.css */
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 165vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* card styling */
+#contacts 
+{
+    max-width: 50%;
+    background-color: rgba(255, 255, 255, 0.363);
+    border-radius: 20px;
+}
+
+.input-group 
+{
+    max-width: 50%;
+    border-radius: 20px;
+}
+/* navbar styling */
+.nav-style 
+{
+    font-family: Comfortaa;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    font-size: 20px
+}
+/* navbar styling on hover */
+.nav-style:hover 
+{
+    color: rgb(142, 81, 170);
+    text-decoration: none;
+}
+
+/* styles name on left */
+.navbar-brand 
+{
+    font-family: Comfortaa;
+    font-weight: bold;
+}
+
+#indexPage {
+    background-image: url("https://cdn.discordapp.com/attachments/695072544704954408/1158247371063443536/Untitled_Artwork_1.png?ex=651b8d6c&is=651a3bec&hm=fafe");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#listPage {
+    background-image: url("https://cdn.discordapp.com/attachments/747611561245409401/1159316644565373019/sdsdvsdv.png?ex=653094c3&is=651e1fc3&hm=0ad9c318c4ab7001630cb50d3cf4aac30d803b9f7c96c3e2df262315d4271588&");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#loginImage {
+    background-size: auto 100%;
+    background-image: url("https://media.discordapp.net/attachments/747611561245409401/1159650603606229113/Untitled_Artwork.png?ex=6531cbc9&is=651f56c9&hm=b2b2c8ffa1ccf1bd104a6ed490247f4e191c0cedaeef43cdedbea052013be3af&=&width=459&height=675");
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#registerImage {
+    background-size: auto 100%;
+    background-image: url("https://media.discordapp.net/attachments/747611561245409401/1159651745878777926/Untitled_Artwork.png?ex=6531ccd9&is=651f57d9&hm=866ad8e4b1088ea7098af09ed368d8a1ef863a32bfd097b2892022c084551139&=&width=459&height=675");
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
